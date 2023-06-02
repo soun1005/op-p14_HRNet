@@ -1,0 +1,17 @@
+.container {
+  /* background-color: rgb(229, 251, 138);
+  border: 7px dotted pink; */
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.img {
+  width: 80px;
+}
