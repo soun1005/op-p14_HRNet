@@ -1,5 +1,5 @@
 body {
-  padding: 0 3rem;
+  padding: 0 2rem;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -79,6 +79,8 @@ pre {
 
 a {
   background-color: transparent;
+  text-decoration: none;
+  color: inherit;
 }
 
 /**

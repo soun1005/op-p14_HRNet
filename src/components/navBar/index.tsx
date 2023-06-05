@@ -18,8 +18,10 @@ const NavBar: React.FC<NavBarProps> = ({ page, link }) => {
         <img className={styles.img} src={Logo} alt="logo" />
       </NavLink>
 
-      <span className={styles.title}>HRnet</span>
-      <NavLink to={link}>{page}</NavLink>
+      <div className={styles.title}>HRnet</div>
+      <NavLink to={link} className={styles.link}>
+        {page}
+      </NavLink>
     </div>
   );
 };
