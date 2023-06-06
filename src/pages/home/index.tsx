@@ -2,8 +2,12 @@ import NavBar from '../../components/navBar';
 import styles from './home.module.css';
 import Dropdown from '../../components/dropdown';
 import Input from '../../components/input';
+import stateData from '../../assets/states';
+import stateDataFormat from '../../dataFormat/stateFormat';
 
 const Home = () => {
+  const formattedState = stateDataFormat(stateData);
+
   return (
     <div>
       <NavBar page="View Current Employees" link={'/employees'} />
@@ -30,7 +34,7 @@ const Home = () => {
             <Input labelHtml="city" labelName="City" inputType="text" />
 
             <label htmlFor="state">State</label>
-            <select name="state" id="state"></select>
+            <Dropdown options={formattedState} />
 
             <Input
               labelHtml="zip-code"
