@@ -1,5 +1,4 @@
-import React from 'react';
-import NavBar from '../../components/navBar';
+import NavBar from '../components/NavBar';
 
 const Employees = () => {
   return (

@@ -1,9 +1,8 @@
-import NavBar from '../../components/navBar';
-import styles from './home.module.css';
-import Dropdown from '../../components/dropdown';
-import Input from '../../components/input';
-import stateData from '../../assets/states';
-import stateDataFormat from '../../dataFormat/stateFormat';
+import NavBar from '../components/NavBar';
+import Dropdown from '../components/Dropdown';
+import Input from '../components/Input';
+import stateData from '../assets/states';
+import stateDataFormat from '../dataFormat/stateFormat';
 
 const Home = () => {
   const formattedState = stateDataFormat(stateData);
@@ -11,7 +10,7 @@ const Home = () => {
   return (
     <div>
       <NavBar page="View Current Employees" link={'/employees'} />
-      <div className={styles.container}>
+      <div>
         <h2>Create Employee</h2>
         <form action="#" id="create-employee">
           <Input
@@ -27,7 +26,7 @@ const Home = () => {
           <label htmlFor="start-date">Start Date</label>
           <input id="start-date" type="text" />
 
-          <fieldset className={styles.address}>
+          <fieldset>
             <legend>Address</legend>
 
             <Input labelHtml="street" labelName="Street" inputType="text" />
@@ -54,6 +53,7 @@ const Home = () => {
             ]}
           />
         </form>
+        <button>Save</button>
       </div>
     </div>
   );

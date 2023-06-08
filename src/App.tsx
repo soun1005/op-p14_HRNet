@@ -1,5 +1,5 @@
-import Home from './pages/home';
-import Employees from './pages/employees';
+import Home from './pages/Home';
+import Employees from './pages/Employees';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
