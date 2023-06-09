@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div className="container">
+        <div className="container mx-auto w-full px-2">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employees" element={<Employees />} />

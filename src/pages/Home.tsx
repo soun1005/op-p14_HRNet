@@ -8,7 +8,7 @@ const Home = () => {
   const formattedState = stateDataFormat(stateData);
 
   return (
-    <div>
+    <div className="w-full">
       <NavBar page="View Current Employees" link={'/employees'} />
       <div>
         <h2>Create Employee</h2>
