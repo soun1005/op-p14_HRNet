@@ -8,7 +8,7 @@ interface NavBarProps {
 
 const NavBar: React.FC<NavBarProps> = ({ page, link }) => {
   return (
-    <div className="mb-2 flex h-36 w-full items-center justify-between px-2.5">
+    <div className="mb-2 flex h-36 items-center justify-between px-2.5">
       <NavLink to={'/'}>
         <img src={Logo} alt="logo" />
       </NavLink>
@@ -16,7 +16,9 @@ const NavBar: React.FC<NavBarProps> = ({ page, link }) => {
       <div className="flex flex-grow items-center justify-center text-3xl">
         HRnet
       </div>
-      <NavLink to={link}>{page}</NavLink>
+      <NavLink to={link} className="ml-auto">
+        {page}
+      </NavLink>
     </div>
   );
 };
