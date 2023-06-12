@@ -7,12 +7,13 @@ type Option = {
 
 type DropdownProps = {
   options: Option[];
+  onChange: (event: any) => void;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ options }) => {
+const Dropdown: React.FC<DropdownProps> = ({ options, onChange }) => {
   return (
     <>
-      <Select options={options} />
+      <Select options={options} onChange={onChange} />
     </>
   );
 };
