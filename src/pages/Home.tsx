@@ -4,17 +4,29 @@ import Input from '../components/Input';
 import stateData from '../assets/states';
 import stateDataFormat from '../dataFormat/stateFormat';
 import { useState } from 'react';
+import { RootState } from '../app/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateData } from '../slices/dataSlice';
 
 const Home = () => {
+  // to format state data to display in a dropdown library
   const formattedState = stateDataFormat(stateData);
+
+  // to get value of dropdowns
   const [state, setState] = useState(null);
   const [department, setDepartment] = useState(null);
 
+  // get redux state
+  const storeData = useSelector((state: RootState) => state.data);
+
+  // initialise dispatch
+  const dispatch = useDispatch();
+
+  // when form is submitted
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const target = e.target;
-
-    const data = {
+    const formData = {
       firstName: target.firstName.value,
       lastName: target.lastName.value,
       street: target.street.value,
@@ -25,9 +37,12 @@ const Home = () => {
       selectedDepartment: department,
     };
 
-    console.log(data);
-  };
+    console.log('formData:', formData);
 
+    // form values are passed to reducer
+    dispatch(updateData({ formData }));
+  };
+  console.log('initialValue after form:', storeData);
   return (
     <div className="h-screen">
       <NavBar page="View Employees" link={'/employees'} />
