@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   firstName: '',
   lastName: '',
-  dateOfBirth: '',
+  birthDate: '',
   startDate: '',
   street: '',
   city: '',
@@ -21,15 +21,15 @@ const dataSlice = createSlice({
       console.log('action.payload:', action.payload);
       return {
         ...state,
-        firstName: action.payload.formData.firstName,
-        lastName: action.payload.formData.lastName,
-        dateOfBirth: action.payload.formData.dateOfBirth,
-        startDate: action.payload.formData.startDate,
-        street: action.payload.formData.street,
-        city: action.payload.formData.city,
-        state: action.payload.formData.selectedState?.label || '',
-        zip: action.payload.formData.zip,
-        department: action.payload.formData.selectedDepartment?.label || '',
+        firstName: action.payload.values.firstName,
+        lastName: action.payload.values.lastName,
+        birthDate: action.payload.values.birthDate,
+        startDate: action.payload.values.startDate,
+        street: action.payload.values.street,
+        city: action.payload.values.city,
+        state: action.payload.values.state,
+        zip: action.payload.values.zip,
+        department: action.payload.values.department,
       };
     },
   },

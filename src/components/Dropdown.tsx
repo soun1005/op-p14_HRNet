@@ -1,4 +1,4 @@
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 
 type Option = {
   value: string;
@@ -7,13 +7,29 @@ type Option = {
 
 type DropdownProps = {
   options: Option[];
-  onChange: (event: any) => void;
+  onChange: (name: string, value: string) => void;
+  label: string;
+  name: string;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ options, onChange }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  options,
+  onChange,
+  label,
+  name,
+}) => {
+  const handleOnChange = (newValue: SingleValue<Option>) => {
+    // console.log(newValue?.value);
+    const value = newValue?.value || '';
+
+    onChange(name, value);
+  };
+
   return (
     <>
-      <Select options={options} onChange={onChange} />
+      <label htmlFor={label}>{label}</label>
+
+      <Select options={options} onChange={handleOnChange} />
     </>
   );
 };

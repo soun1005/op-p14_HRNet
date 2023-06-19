@@ -7,25 +7,37 @@ import { useState } from 'react';
 import { RootState } from '../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateData } from '../slices/dataSlice';
+import MyDatePicker from '../components/DatePicker';
+
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  street: string;
+  city: string;
+  zip: string;
+  state: string;
+  department: string;
+  startDate: string;
+  birthDate: Date | null;
+};
 
 const Home = () => {
   // to format state data to display in a dropdown library
   const formattedState = stateDataFormat(stateData);
 
-  // to get value of dropdowns
-  const [state, setState] = useState(null);
-  const [department, setDepartment] = useState(null);
-
-  const [values, setValues] = useState<{ [key: string]: string }>({
+  const [values, setValues] = useState<FormValues>({
     firstName: '',
     lastName: '',
     street: '',
     city: '',
     state: '',
     zip: '',
-    selectedState: '',
-    selectedDepartment: '',
+    department: '',
+    startDate: '',
+    birthDate: null,
   });
+
+  console.log('values', values);
 
   // get redux state
   const storeData = useSelector((state: RootState) => state.data);
@@ -36,27 +48,16 @@ const Home = () => {
   // when form is submitted
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const target = e.target;
-    const formData = {
-      firstName: target.firstName.value,
-      lastName: target.lastName.value,
-      street: target.street.value,
-      city: target.city.value,
-      state: target.state,
-      zip: target.zip.value,
-      selectedState: state,
-      selectedDepartment: department,
-    };
 
     // form values are passed to reducer
-    dispatch(updateData({ formData }));
+    dispatch(updateData({ values }));
   };
-  console.log('initialValue:', storeData);
 
-  const onChange = (e: any) => {
-    console.log(e.target.value);
-    setValues({ ...values, [e.target.name]: e.target.value });
+  const onChange = (name: string, value: string | Date | null) => {
+    setValues({ ...values, [name]: value });
   };
+
+  console.log('redux state:', storeData);
 
   return (
     <div className="h-screen">
@@ -90,11 +91,22 @@ const Home = () => {
             errorMessage="Lastname should be 2-16 characters"
           />
 
-          <label htmlFor="dateOfBirth">Date of Birth</label>
-          <input id="date-of-birth" type="text" />
+          <MyDatePicker
+            label="Date of Birth"
+            onChange={onChange}
+            selected={values.birthDate}
+            name="birthDate"
+            filterDate={(d) => {
+              return new Date() > d;
+            }}
+          />
 
-          <label htmlFor="startDate">Start Date</label>
-          <input id="start-date" type="text" />
+          <MyDatePicker
+            label="Start Date"
+            onChange={onChange}
+            selected={values.startDate}
+            name="startDate"
+          />
 
           <fieldset className="mb-4 flex flex-col rounded-sm border border-solid border-sub-green p-3">
             <legend>Address</legend>
@@ -119,8 +131,13 @@ const Home = () => {
               errorMessage="City name should be 2-10 characters"
             />
 
-            <label htmlFor="state">State</label>
-            <Dropdown options={formattedState} onChange={setState} />
+            {/* <label htmlFor="state">State</label> */}
+            <Dropdown
+              options={formattedState}
+              onChange={onChange}
+              label="State"
+              name="state"
+            />
             <Input
               name="zip"
               label="Zip Code"
@@ -133,7 +150,7 @@ const Home = () => {
             />
           </fieldset>
 
-          <label htmlFor="department">Department</label>
+          {/* <label htmlFor="department">Department</label> */}
           <Dropdown
             options={[
               { value: 'sales', label: 'Sales' },
@@ -142,7 +159,9 @@ const Home = () => {
               { value: 'human resources', label: 'Human Resources' },
               { value: 'legal', label: 'Legal' },
             ]}
-            onChange={setDepartment}
+            onChange={onChange}
+            label="Department"
+            name="department"
           />
           <button
             type="submit"
