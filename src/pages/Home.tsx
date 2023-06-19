@@ -16,6 +16,17 @@ const Home = () => {
   const [state, setState] = useState(null);
   const [department, setDepartment] = useState(null);
 
+  const [values, setValues] = useState<{ [key: string]: string }>({
+    firstName: '',
+    lastName: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
+    selectedState: '',
+    selectedDepartment: '',
+  });
+
   // get redux state
   const storeData = useSelector((state: RootState) => state.data);
 
@@ -32,17 +43,21 @@ const Home = () => {
       street: target.street.value,
       city: target.city.value,
       state: target.state,
-      zipCode: target.zipCode.value,
+      zip: target.zip.value,
       selectedState: state,
       selectedDepartment: department,
     };
 
-    console.log('formData:', formData);
-
     // form values are passed to reducer
     dispatch(updateData({ formData }));
   };
-  console.log('initialValue after form:', storeData);
+  console.log('initialValue:', storeData);
+
+  const onChange = (e: any) => {
+    console.log(e.target.value);
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="h-screen">
       <NavBar page="View Employees" link={'/employees'} />
@@ -55,16 +70,24 @@ const Home = () => {
           onSubmit={handleSubmit}
         >
           <Input
-            labelHtml="firstName"
-            labelName="First Name"
-            inputType="text"
-            placeH="Henry"
+            name="firstName"
+            label="First Name"
+            type="text"
+            placeholder="Henry"
+            value={values.firstName}
+            required
+            onChange={onChange}
+            errorMessage="Firstname should be 2-16 characters"
           />
           <Input
-            labelHtml="lastName"
-            labelName="Last Name"
-            inputType="text"
-            placeH="Cavil"
+            name="lastName"
+            label="Last Name"
+            type="text"
+            placeholder="Cavil"
+            value={values.lastName}
+            required
+            onChange={onChange}
+            errorMessage="Lastname should be 2-16 characters"
           />
 
           <label htmlFor="dateOfBirth">Date of Birth</label>
@@ -75,28 +98,38 @@ const Home = () => {
 
           <fieldset className="mb-4 flex flex-col rounded-sm border border-solid border-sub-green p-3">
             <legend>Address</legend>
-
             <Input
-              labelHtml="street"
-              labelName="Street"
-              inputType="text"
-              placeH="Kensington"
+              name="street"
+              label="Street"
+              type="text"
+              placeholder="Kensington"
+              value={values.street}
+              required
+              onChange={onChange}
+              errorMessage="Street name should be 2-10 characters"
             />
             <Input
-              labelHtml="city"
-              labelName="City"
-              inputType="text"
-              placeH="London"
+              name="city"
+              label="City"
+              type="text"
+              placeholder="London"
+              value={values.city}
+              required
+              onChange={onChange}
+              errorMessage="City name should be 2-10 characters"
             />
 
             <label htmlFor="state">State</label>
             <Dropdown options={formattedState} onChange={setState} />
-
             <Input
-              labelHtml="zipCode"
-              labelName="Zip Code"
-              inputType="number"
-              placeH="92160"
+              name="zip"
+              label="Zip Code"
+              type="number"
+              placeholder="92160"
+              value={values.zip}
+              required
+              onChange={onChange}
+              errorMessage="Zipcode should be 5 numbers or more"
             />
           </fieldset>
 

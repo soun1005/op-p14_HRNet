@@ -1,25 +1,37 @@
-type InputProps = {
-  labelHtml: string;
-  labelName: string;
-  inputType: string;
-  placeH: string;
+type FunctionProps = {
+  label: string;
+  type: string;
+  placeholder: string;
+  errorMessage: string;
+  name: string;
+  required: boolean;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
-const Input: React.FC<InputProps> = ({
-  labelHtml,
-  labelName,
-  inputType,
-  placeH,
+const Input: React.FC<FunctionProps> = ({
+  label,
+  type,
+  placeholder,
+  errorMessage,
+  name,
+  required,
+  onChange,
+  value,
 }) => {
   return (
     <div className="my-1 flex flex-col">
-      <label htmlFor={labelHtml}>{labelName}</label>
+      <label>{label}</label>
       <input
-        type={inputType}
-        id={labelHtml}
-        placeholder={placeH}
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        required={required}
+        onChange={onChange}
+        value={value}
         className="my-1 min-h-[auto] rounded-sm border border-solid border-gray-300 placeholder-gray-200 invalid:border-red-500 focus:placeholder-opacity-0 focus:outline-none"
       />
+      <div>{errorMessage}</div>
     </div>
   );
 };

@@ -27,9 +27,9 @@ const dataSlice = createSlice({
         startDate: action.payload.formData.startDate,
         street: action.payload.formData.street,
         city: action.payload.formData.city,
-        state: action.payload.formData.selectedState.value,
+        state: action.payload.formData.selectedState?.label || '',
         zip: action.payload.formData.zip,
-        department: action.payload.formData.selectedDepartment.value,
+        department: action.payload.formData.selectedDepartment?.label || '',
       };
     },
   },
