@@ -5,9 +5,8 @@ type State = {
 
 const stateDataFormat = (stateData: State[]) => {
   return stateData.map(({ name, abbreviation }) => ({
-    value: name,
+    value: abbreviation,
     label: name,
-    abbreviation,
   }));
 };
 

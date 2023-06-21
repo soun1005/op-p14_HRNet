@@ -9,7 +9,7 @@ type Props = {
 };
 
 const dateFormat = (date: Date) => {
-  return date.toLocaleDateString('en-US');
+  return date.toLocaleDateString('fr-FR');
 };
 
 const MyDatePicker = ({

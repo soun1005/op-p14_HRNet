@@ -19,9 +19,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   name,
 }) => {
   const handleOnChange = (newValue: SingleValue<Option>) => {
-    // console.log(newValue?.value);
     const value = newValue?.value || '';
-
     onChange(name, value);
   };
 

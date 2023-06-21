@@ -36,7 +36,7 @@ const Input: React.FC<FunctionProps> = ({
         required={required}
         onChange={handleOnChange}
         value={value}
-        className="my-1 min-h-[auto] rounded-sm border border-solid border-gray-300 placeholder-gray-200 invalid:border-red-500 focus:placeholder-opacity-0 focus:outline-none"
+        className="my-1 min-h-[auto] rounded-sm border border-solid border-gray-300 placeholder-gray-200 focus:placeholder-opacity-0 focus:outline-none"
       />
       <div>{errorMessage}</div>
     </div>

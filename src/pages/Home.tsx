@@ -24,6 +24,7 @@ type FormValues = {
 const Home = () => {
   // to format state data to display in a dropdown library
   const formattedState = stateDataFormat(stateData);
+  console.log('formatedState:', formattedState);
 
   const [values, setValues] = useState<FormValues>({
     firstName: '',
@@ -49,7 +50,7 @@ const Home = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    // form values are passed to reducer
+    // form values are passed to state by reducer
     dispatch(updateData({ values }));
   };
 
