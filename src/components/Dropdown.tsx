@@ -28,7 +28,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <>
       <label htmlFor={label}>{label}</label>
-
       <Select options={options} onChange={handleOnChange} />
     </>
   );

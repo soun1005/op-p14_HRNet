@@ -18,7 +18,7 @@ type FormValues = {
   state: string;
   department: string;
   startDate: string;
-  birthDate: Date | null;
+  birthDate: string;
 };
 
 const Home = () => {
@@ -34,7 +34,7 @@ const Home = () => {
     zip: '',
     department: '',
     startDate: '',
-    birthDate: null,
+    birthDate: '',
   });
 
   console.log('values', values);
@@ -54,6 +54,7 @@ const Home = () => {
   };
 
   const onChange = (name: string, value: string | Date | null) => {
+    // using variable as key
     setValues({ ...values, [name]: value });
   };
 
@@ -90,7 +91,6 @@ const Home = () => {
             onChange={onChange}
             errorMessage="Lastname should be 2-16 characters"
           />
-
           <MyDatePicker
             label="Date of Birth"
             onChange={onChange}
@@ -100,14 +100,12 @@ const Home = () => {
               return new Date() > d;
             }}
           />
-
           <MyDatePicker
             label="Start Date"
             onChange={onChange}
             selected={values.startDate}
             name="startDate"
           />
-
           <fieldset className="mb-4 flex flex-col rounded-sm border border-solid border-sub-green p-3">
             <legend>Address</legend>
             <Input
@@ -130,8 +128,6 @@ const Home = () => {
               onChange={onChange}
               errorMessage="City name should be 2-10 characters"
             />
-
-            {/* <label htmlFor="state">State</label> */}
             <Dropdown
               options={formattedState}
               onChange={onChange}
@@ -149,8 +145,6 @@ const Home = () => {
               errorMessage="Zipcode should be 5 numbers or more"
             />
           </fieldset>
-
-          {/* <label htmlFor="department">Department</label> */}
           <Dropdown
             options={[
               { value: 'sales', label: 'Sales' },

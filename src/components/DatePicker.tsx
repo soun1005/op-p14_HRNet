@@ -2,10 +2,14 @@ import DatePicker from 'react-datepicker';
 
 type Props = {
   label: string;
-  onChange: (name: string, value: Date | null) => void;
-  selected: any;
+  onChange: (name: string, value: string | Date) => void;
+  selected: string;
   name: string;
   filterDate?: ((date: Date) => boolean) | undefined;
+};
+
+const dateFormat = (date: Date) => {
+  return date.toLocaleDateString('en-US');
 };
 
 const MyDatePicker = ({
@@ -15,17 +19,18 @@ const MyDatePicker = ({
   name,
   filterDate,
 }: Props) => {
-  //   (date: Date) => setStartDate(date)
-  const handleOnChange = (date: Date | null) => {
-    console.log(date);
-    onChange(name, date);
+  const handleOnChange = (date: Date) => {
+    console.log(typeof date);
+    onChange(name, dateFormat(date));
   };
+
+  const selectedDate = selected ? new Date(selected) : null;
 
   return (
     <>
       <label>{label}</label>
       <DatePicker
-        selected={selected}
+        selected={selectedDate}
         dateFormat="dd/MM/yyyy"
         onChange={handleOnChange}
         closeOnScroll={true}
