@@ -15,7 +15,7 @@ type FormValues = {
   street: string;
   city: string;
   zip: string;
-  state: string;
+  state: string | null;
   department: string;
   startDate: string;
   birthDate: string;
@@ -49,9 +49,19 @@ const Home = () => {
   // when form is submitted
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
     // form values are passed to state by reducer
     dispatch(updateData({ values }));
+    setValues({
+      firstName: '',
+      lastName: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
+      department: '',
+      startDate: '',
+      birthDate: '',
+    });
   };
 
   const onChange = (name: string, value: string | Date | null) => {

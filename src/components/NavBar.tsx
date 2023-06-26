@@ -8,7 +8,7 @@ interface NavBarProps {
 
 const NavBar: React.FC<NavBarProps> = ({ page, link }) => {
   return (
-    <div className="mb-2 flex h-36 items-center justify-between px-2.5">
+    <div className="h-35 mb-2 flex items-center justify-between px-2.5 pt-2">
       <NavLink to={'/'}>
         <img src={Logo} alt="logo" />
       </NavLink>
