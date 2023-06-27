@@ -2,17 +2,13 @@ import DatePicker from 'react-datepicker';
 
 type Props = {
   label: string;
-  onChange: (name: string, value: string | Date) => void;
+  onChange: (name: string, value: string) => void;
   selected: string;
   name: string;
   filterDate?: ((date: Date) => boolean) | undefined;
 };
 
-const dateFormat = (date: Date) => {
-  // return date.toLocaleDateString('fr-FR');
-  const formattedDate = date.toLocaleDateString('fr-FR');
-  return formattedDate;
-};
+const dateFormat = (date: Date) => date.toLocaleDateString('us-US');
 
 const MyDatePicker = ({
   label,
@@ -25,7 +21,7 @@ const MyDatePicker = ({
     console.log(typeof date);
     onChange(name, dateFormat(date));
   };
-
+  // console.log('selected', selected);
   const selectedDate = selected ? new Date(selected) : null;
 
   return (

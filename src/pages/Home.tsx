@@ -15,11 +15,14 @@ type FormValues = {
   street: string;
   city: string;
   zip: string;
-  state: string | null;
+  state: string;
   department: string;
   startDate: string;
   birthDate: string;
 };
+
+const stateDefault = stateData[0];
+console.log(stateDefault);
 
 const Home = () => {
   // to format state data to display in a dropdown library
@@ -64,7 +67,7 @@ const Home = () => {
     });
   };
 
-  const onChange = (name: string, value: string | Date | null) => {
+  const onChange = (name: string, value: string) => {
     // using variable as key
     setValues({ ...values, [name]: value });
   };
@@ -144,6 +147,7 @@ const Home = () => {
               onChange={onChange}
               label="State"
               name="state"
+              value={values.state}
             />
             <Input
               name="zip"
@@ -167,6 +171,7 @@ const Home = () => {
             onChange={onChange}
             label="Department"
             name="department"
+            value={values.department}
           />
           <button
             type="submit"
