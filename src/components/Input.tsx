@@ -38,7 +38,7 @@ const Input: React.FC<FunctionProps> = ({
         value={value}
         className="my-1 min-h-[auto] rounded-sm border border-solid border-gray-300 placeholder-gray-200 focus:placeholder-opacity-0 focus:outline-none"
       />
-      <div>{errorMessage}</div>
+      <div className="text-xs text-zinc-400">{errorMessage}</div>
     </div>
   );
 };

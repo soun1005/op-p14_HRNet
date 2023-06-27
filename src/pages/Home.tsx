@@ -4,8 +4,8 @@ import Input from '../components/Input';
 import stateData from '../assets/states';
 import stateDataFormat from '../dataFormat/stateFormat';
 import { useState } from 'react';
-import { RootState } from '../app/store';
-import { useDispatch, useSelector } from 'react-redux';
+// import { RootState } from '../app/store';
+import { useDispatch } from 'react-redux';
 import { updateData } from '../slices/dataSlice';
 import MyDatePicker from '../components/DatePicker';
 
@@ -21,13 +21,13 @@ type FormValues = {
   birthDate: string;
 };
 
-const stateDefault = stateData[0];
-console.log(stateDefault);
+// const stateDefault = stateData[0];
+// console.log(stateDefault);
 
 const Home = () => {
   // to format state data to display in a dropdown library
   const formattedState = stateDataFormat(stateData);
-  console.log('formatedState:', formattedState);
+  // console.log('formatedState:', formattedState);
 
   const [values, setValues] = useState<FormValues>({
     firstName: '',
@@ -41,10 +41,10 @@ const Home = () => {
     birthDate: '',
   });
 
-  console.log('values', values);
+  // console.log('values', values);
 
   // get redux state
-  const storeData = useSelector((state: RootState) => state.data);
+  // const storeData = useSelector((state: RootState) => state.data);
 
   // initialise dispatch
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const Home = () => {
     setValues({ ...values, [name]: value });
   };
 
-  console.log('redux state:', storeData);
+  // console.log('redux state:', storeData);
 
   return (
     <div className="h-screen">

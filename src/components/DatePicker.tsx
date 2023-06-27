@@ -18,7 +18,7 @@ const MyDatePicker = ({
   filterDate,
 }: Props) => {
   const handleOnChange = (date: Date) => {
-    console.log(typeof date);
+    // console.log(typeof date);
     onChange(name, dateFormat(date));
   };
   // console.log('selected', selected);
