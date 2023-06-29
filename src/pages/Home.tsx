@@ -3,13 +3,14 @@ import Dropdown from '../components/forms/Dropdown';
 import Input from '../components/forms/inputs/Input';
 import stateData from '../assets/states';
 import stateDataFormat from '../dataFormat/stateFormat';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // import { RootState } from '../app/store';
 import { useDispatch } from 'react-redux';
 import { updateData } from '../slices/dataSlice';
 import MyDatePicker from '../components/forms/DatePicker';
 import FormType from '../type/formType';
 import validateForm from '../components/forms/inputs/formValidation';
+import Error from '../components/forms/inputs/Error';
 
 // const stateDefault = stateData[0];
 // console.log(stateDefault);
@@ -18,7 +19,7 @@ const Home = () => {
   // to format state data to display in a dropdown library
   const formattedState = stateDataFormat(stateData);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [values, setValues] = useState<FormType>({
     // initial value
     firstName: '',
@@ -38,45 +39,40 @@ const Home = () => {
   // when form is submitted
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    // dispatch(updateData({ values }));
 
-    dispatch(updateData({ values }));
+    // 1, 2
+    // Validate inputs and generates error messages
+    // and save inside formError by useState(=setFormErrors)
 
-    setFormErrors(validateForm(values));
-    // if (Object.keys(formErrors).length === 0) {
-    //   setIsSubmit(true);
-    // }
-    console.log(formErrors);
+    // 아래와 같이 함수와 인자를 전달하게 되면
+    // -> setFormErrors(validateForm(values))
+    // formErrors에 에러 저장이 안되기 때문에 const로 저장을 미리 하고 useState에 전달해줌
+    // 이렇게 하면 useEffect사용하지 않아도 자동으로 리렌더링 되기 때문에 에러 메세지가 뜸
+    // 다시 말해, validateForm(values)를 저장함으로써 자동으로 formErrors의 state가 업데이트 됨
 
-    // reset inputs!
-    setValues({
-      firstName: '',
-      lastName: '',
-      street: '',
-      city: '',
-      state: '',
-      zip: '',
-      department: '',
-      startDate: '',
-      birthDate: '',
-    });
-  };
-
-  useEffect(() => {
+    const validate = validateForm(values);
+    setFormErrors(validate);
     console.log('formErrors', formErrors);
-    if (
-      Object.keys(formErrors).length === 0 &&
-      isSubmit &&
-      values.birthDate &&
-      values.startDate &&
-      values.state &&
-      values.department
-    ) {
-      setIsSubmit(true);
-    } else {
-      setIsSubmit(false);
+    console.log('validate', validate);
+
+    if (Object.keys(validate).length === 0) {
+      console.log('validated');
+      dispatch(updateData({ values }));
+      setValues({
+        firstName: '',
+        lastName: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        department: '',
+        startDate: '',
+        birthDate: '',
+      });
+      setIsModalOpen(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleSubmit]);
+  };
 
   const onChange = (name: string, value: string) => {
     // using variable as key
@@ -104,7 +100,7 @@ const Home = () => {
             value={values.firstName}
             onChange={onChange}
           />
-          <p>{formErrors.firstName}</p>
+          <Error errorMsg={formErrors.firstName} />
 
           <Input
             name="lastName"
@@ -114,7 +110,8 @@ const Home = () => {
             value={values.lastName}
             onChange={onChange}
           />
-          <p>{formErrors.lastName}</p>
+          <Error errorMsg={formErrors.lastName} />
+
           <MyDatePicker
             label="Date of Birth"
             onChange={onChange}
@@ -124,14 +121,16 @@ const Home = () => {
               return new Date() > d;
             }}
           />
-          <p>{formErrors.birthDate}</p>
+          <Error errorMsg={formErrors.birthDate} />
+
           <MyDatePicker
             label="Start Date"
             onChange={onChange}
             selected={values.startDate}
             name="startDate"
           />
-          <p>{formErrors.startDate}</p>
+          <Error errorMsg={formErrors.startDate} />
+
           <fieldset className="mb-4 flex flex-col rounded-sm border border-solid border-sub-green p-3">
             <legend>Address</legend>
             <Input
@@ -142,7 +141,8 @@ const Home = () => {
               value={values.street}
               onChange={onChange}
             />
-            <p>{formErrors.street}</p>
+            <Error errorMsg={formErrors.street} />
+
             <Input
               name="city"
               label="City"
@@ -151,7 +151,8 @@ const Home = () => {
               value={values.city}
               onChange={onChange}
             />
-            <p>{formErrors.city}</p>
+            <Error errorMsg={formErrors.city} />
+
             <Dropdown
               options={formattedState}
               onChange={onChange}
@@ -159,7 +160,8 @@ const Home = () => {
               name="state"
               value={values.state}
             />
-            <p>{formErrors.state}</p>
+            <Error errorMsg={formErrors.state} />
+
             <Input
               name="zip"
               label="Zip Code"
@@ -168,8 +170,9 @@ const Home = () => {
               value={values.zip}
               onChange={onChange}
             />
-            <p>{formErrors.zip}</p>
+            <Error errorMsg={formErrors.zip} />
           </fieldset>
+
           <Dropdown
             options={[
               { value: 'sales', label: 'Sales' },
@@ -183,7 +186,7 @@ const Home = () => {
             name="department"
             value={values.department}
           />
-          <p>{formErrors.department}</p>
+          <Error errorMsg={formErrors.department} />
 
           <button
             type="submit"
@@ -193,10 +196,8 @@ const Home = () => {
           </button>
         </form>
         {/* modal */}
-        {Object.keys(formErrors).length === 0 && isSubmit ? (
+        {isModalOpen && (
           <div className="message success">Registered successfully</div>
-        ) : (
-          <div className="message fail">Please fill the blanks</div>
         )}
       </div>
     </div>
