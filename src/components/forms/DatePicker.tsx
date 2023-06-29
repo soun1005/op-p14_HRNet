@@ -21,7 +21,7 @@ const MyDatePicker = ({
     // console.log(typeof date);
     onChange(name, dateFormat(date));
   };
-  // console.log('selected', selected);
+
   const selectedDate = selected ? new Date(selected) : null;
 
   return (
@@ -34,7 +34,7 @@ const MyDatePicker = ({
         closeOnScroll={true}
         todayButton="Today"
         filterDate={filterDate}
-        className="mb-5 min-h-[auto] rounded-sm border border-solid border-gray-300 placeholder-gray-200 focus:placeholder-opacity-0 focus:outline-none"
+        className="mb-1 min-h-[auto] rounded-sm border border-solid border-gray-300 placeholder-gray-200 focus:placeholder-opacity-0 focus:outline-none"
       />
     </>
   );

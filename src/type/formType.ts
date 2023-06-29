@@ -1,4 +1,4 @@
-export type FormValues = {
+type FormValues = {
   firstName: string;
   lastName: string;
   street: string;
@@ -9,3 +9,5 @@ export type FormValues = {
   startDate: string;
   birthDate: string;
 };
+
+export default FormValues;
