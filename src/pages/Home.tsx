@@ -11,6 +11,7 @@ import MyDatePicker from '../components/forms/DatePicker';
 import FormType from '../type/formType';
 import validateForm from '../components/forms/inputs/formValidation';
 import Error from '../components/forms/inputs/Error';
+import Modal from '../components/Modal';
 
 // const stateDefault = stateData[0];
 // console.log(stateDefault);
@@ -19,7 +20,7 @@ const Home = () => {
   // to format state data to display in a dropdown library
   const formattedState = stateDataFormat(stateData);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [values, setValues] = useState<FormType>({
     // initial value
     firstName: '',
@@ -71,6 +72,7 @@ const Home = () => {
         birthDate: '',
       });
       setIsModalOpen(true);
+      // modal opened
     }
   };
 
@@ -80,10 +82,14 @@ const Home = () => {
     // validateForm(values);
   };
 
+  // to check stored data in Redux
+  // const storeData = useSelector((state: RootState) => state.data);
+  // console.log(storeData);
+
   return (
-    <div className="h-screen">
+    <div className="relative h-screen">
       <NavBar page="View Employees" link={'/employees'} />
-      <div className="max-w-6/12 mx-auto flex h-full max-w-xs flex-col items-center">
+      <div className="formContainer max-w-6/12 relative mx-auto flex h-full max-w-xs flex-col items-center">
         <h2 className="mb-8 text-xl">Create Employee</h2>
 
         <form
@@ -195,11 +201,22 @@ const Home = () => {
             Save
           </button>
         </form>
-        {/* modal */}
-        {isModalOpen && (
-          <div className="message success">Registered successfully</div>
-        )}
       </div>
+      {/* modal */}
+      {isModalOpen && (
+        <Modal
+          closeModal={setIsModalOpen}
+          backgroundClass="modalBackground fixed top-0 left-0 flex flex-col h-screen w-screen items-center justify-center"
+          containerClass="modalContainer bg-neutral-300/80 flex flex-col items-center justify-around py-1 w-1/3 h-28 rounded"
+          bodyClass="modalBody"
+          modalMsgClass="modalMsg font-medium"
+          modalMsg="Employee is successfully created!"
+          footerClass="modalFooter"
+          btnClass="modalBtn rounded-full bg-sub-green py-1 w-20"
+          btnLabel="close"
+          btnLabelClass="text-sm text-slate-50 font-medium"
+        />
+      )}
     </div>
   );
 };
