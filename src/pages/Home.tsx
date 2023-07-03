@@ -1,11 +1,11 @@
 import NavBar from '../components/NavBar';
 import Dropdown from '../components/forms/Dropdown';
 import Input from '../components/forms/inputs/Input';
-import stateData from '../assets/states';
+import stateData from '../data/states';
 import stateDataFormat from '../dataFormat/stateFormat';
 import { useState } from 'react';
-// import { RootState } from '../app/store';
-import { useDispatch } from 'react-redux';
+import { RootState } from '../app/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateData } from '../slices/dataSlice';
 import MyDatePicker from '../components/forms/DatePicker';
 import FormType from '../type/formType';
@@ -83,8 +83,8 @@ const Home = () => {
   };
 
   // to check stored data in Redux
-  // const storeData = useSelector((state: RootState) => state.data);
-  // console.log(storeData);
+  const storeData = useSelector((state: RootState) => state.data);
+  console.log(storeData);
 
   return (
     <div className="relative h-screen">

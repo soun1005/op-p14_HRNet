@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import NavBar from '../components/NavBar';
 import { RootState } from '../app/store';
-// import Table from '../components/Table';
+import { Table } from '../components/table/Table';
 
 const Employees = () => {
   // get redux state
@@ -13,6 +13,7 @@ const Employees = () => {
       <NavBar page="Return to home" link={'/'} />
       <h1>Current Employees</h1>
       {/* <Table employeeData={storedData} /> */}
+      <Table />
     </div>
   );
 };
