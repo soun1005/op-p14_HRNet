@@ -203,20 +203,22 @@ const Home = () => {
         </form>
       </div>
       {/* modal */}
-      {isModalOpen && (
-        <Modal
-          closeModal={setIsModalOpen}
-          backgroundClass="modalBackground fixed top-0 left-0 flex flex-col h-screen w-screen items-center justify-center"
-          containerClass="modalContainer bg-neutral-300/80 flex flex-col items-center justify-around py-1 w-1/3 h-28 rounded"
-          bodyClass="modalBody"
-          modalMsgClass="modalMsg font-medium"
-          modalMsg="Employee is successfully created!"
-          footerClass="modalFooter"
-          btnClass="modalBtn rounded-full bg-sub-green py-1 w-20"
-          btnLabel="close"
-          btnLabelClass="text-sm text-slate-50 font-medium"
-        />
-      )}
+      <Modal
+        onClose={() => setIsModalOpen(false)}
+        setModalOpen={isModalOpen}
+        backgroundClass="modalBackground fixed top-0 left-0 flex flex-col h-screen w-screen items-center justify-center"
+        containerClass="modalContainer bg-neutral-300/80 flex flex-col items-center justify-around py-1 w-1/3 h-28 rounded"
+        bodyClass="modalBody"
+        footerClass="modalFooter"
+        btnClass="modalBtn rounded-full bg-sub-green py-1 w-20"
+        btnLabel="close"
+        btnLabelClass="text-sm text-slate-50 font-medium"
+        children={
+          <div>
+            <h1>Employee is successfully created!</h1>
+          </div>
+        }
+      />
     </div>
   );
 };
