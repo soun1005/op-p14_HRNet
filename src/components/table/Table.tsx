@@ -1,59 +1,57 @@
 import React, { useState } from 'react';
 import {
   ColumnDef,
-  // ColumnDef,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
+  getPaginationRowModel,
+  getFilteredRowModel,
 } from '@tanstack/react-table';
 import { makeData } from './makeData';
 import FormValues from '../../type/formType';
 import mockData from '../../data/mockEmployees';
-// import columns from './columns';
 
 export function Table() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-
   // columns
   const columns = React.useMemo<ColumnDef<FormValues>[]>(
     () => [
       {
-        header: () => <span>First Name</span>,
+        header: 'First Name',
         accessorKey: 'firstName',
       },
       {
         accessorKey: 'lastName',
-        header: () => <span>Last Name</span>,
+        header: 'Last Name',
       },
       {
         accessorKey: 'startDate',
-        header: () => <span>Start Date</span>,
+        header: 'Start Date',
       },
       {
         accessorKey: 'department',
-        header: () => <span>Department</span>,
+        header: 'Department',
       },
       {
         accessorKey: 'birthDate',
-        header: () => <span>Date of Birth</span>,
+        header: 'Date of Birth',
       },
       {
         accessorKey: 'street',
-        header: () => <span>Street</span>,
+        header: 'Street',
       },
       {
         accessorKey: 'city',
-        header: () => <span>City</span>,
+        header: 'City',
       },
       {
         accessorKey: 'state',
-        header: () => <span>State</span>,
+        header: 'State',
       },
       {
         accessorKey: 'zip',
-        header: () => <span>Zip Code</span>,
+        header: 'Zip Code',
       },
     ],
     []
@@ -61,26 +59,54 @@ export function Table() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useState<FormValues[]>(() => makeData(mockData));
-
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [filtering, setFiltering] = useState('');
   const table = useReactTable({
     data,
     columns,
     state: {
       sorting,
+      globalFilter: filtering,
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setFiltering,
     debugTable: true,
   });
 
   return (
-    <div className="p-2">
-      <div className="h-2" />
-      <table>
-        <thead>
+    <div className="tableWrap mb-10 mt-5 flex w-full flex-col items-center pb-5">
+      <div className="optionWrap flex w-full justify-between">
+        <select
+          value={table.getState().pagination.pageSize}
+          onChange={(e) => {
+            table.setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          value={filtering}
+          onChange={(e) => setFiltering(e.target.value)}
+          className="rounded border border-black"
+        />
+      </div>
+      {/* <div /> */}
+      <table className="mt-3 h-full w-full">
+        <thead className="h-12 border  bg-sub-green text-slate-50">
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <tr
+              key={headerGroup.id}
+              className="border-seperate border-spacing-12"
+            >
               {headerGroup.headers.map((header) => {
                 return (
                   <th key={header.id} colSpan={header.colSpan}>
@@ -98,8 +124,8 @@ export function Table() {
                           header.getContext()
                         )}
                         {{
-                          asc: ' 🔼',
-                          desc: ' 🔽',
+                          asc: '⬆️',
+                          desc: '⬇️',
                         }[header.column.getIsSorted() as string] ?? null}
                       </div>
                     )}
@@ -109,29 +135,53 @@ export function Table() {
             </tr>
           ))}
         </thead>
-        <tbody>
-          {table
-            .getRowModel()
-            .rows.slice(0, 10)
-            .map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+        <tbody className="text-center">
+          {table.getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
-      <div> Total : {table.getRowModel().rows.length} Employees</div>
+      {/* <button onClick={() => table.setPageIndex(0)}>First Page</button> */}
+
+      <div className="btnWrap mt-8 flex w-full justify-between">
+        <button
+          className=" rounded-lg border bg-sub-green px-5 py-1 text-slate-100"
+          disabled={!table.getCanPreviousPage()}
+          onClick={() => table.previousPage()}
+        >
+          Previous Page
+        </button>
+        <button
+          className=" rounded-lg border bg-sub-green px-5 py-1 text-slate-100"
+          disabled={!table.getCanNextPage()}
+          onClick={() => table.nextPage()}
+        >
+          Next Page
+        </button>
+      </div>
+
+      <span className="flex items-center gap-1">
+        <div>Page</div>
+        <strong>
+          {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+        </strong>
+      </span>
+      {/* <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
+        Last Page
+      </button> */}
     </div>
   );
 }

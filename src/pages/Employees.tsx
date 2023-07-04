@@ -9,9 +9,9 @@ const Employees = () => {
   console.log(storedData);
 
   return (
-    <div>
+    <div className="h-full">
       <NavBar page="Return to home" link={'/'} />
-      <h1>Current Employees</h1>
+      <h1 className="my-10 text-center">Current Employees</h1>
       {/* <Table employeeData={storedData} /> */}
       <Table />
     </div>
