@@ -90,7 +90,7 @@ const Home = () => {
     <div className="relative h-screen">
       <NavBar page="View Employees" link={'/employees'} />
       <div className="formContainer max-w-6/12 relative mx-auto flex h-full max-w-xs flex-col items-center">
-        <h2 className="mb-8 text-xl">Create Employee</h2>
+        <h2 className="mb-6 text-center text-2xl">Create Employee</h2>
 
         <form
           action="#"

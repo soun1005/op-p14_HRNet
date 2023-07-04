@@ -13,9 +13,7 @@ const Employees = () => {
   return (
     <div className="h-full">
       <NavBar page="Return to home" link={'/'} />
-      <h1 className="my-10 text-center font-extrabold underline">
-        Current Employees
-      </h1>
+      <h1 className="mb-6 text-center text-2xl">Current Employees</h1>
       {storedData.length === 0 ? (
         <span className="align-center mt-48 flex h-full w-full justify-center">
           No employees

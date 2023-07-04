@@ -156,7 +156,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
       </table>
       {/* <button onClick={() => table.setPageIndex(0)}>First Page</button> */}
 
-      <div className="btnWrap mt-8 flex w-full justify-between">
+      <div className="btnWrap mt-16 flex w-full justify-between">
         <button
           className=" rounded-lg border bg-sub-green px-5 py-1 text-slate-100"
           disabled={!table.getCanPreviousPage()}
