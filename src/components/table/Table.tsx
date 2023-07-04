@@ -11,9 +11,9 @@ import {
 } from '@tanstack/react-table';
 import { makeData } from './makeData';
 import FormValues from '../../type/formType';
-import mockData from '../../data/mockEmployees';
+// import mockData from '../../data/mockEmployees';
 
-export function Table() {
+export function BasicTable({ tableData }: { tableData: FormValues[] }) {
   // columns
   const columns = React.useMemo<ColumnDef<FormValues>[]>(
     () => [
@@ -58,7 +58,7 @@ export function Table() {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [data, setData] = useState<FormValues[]>(() => makeData(mockData));
+  const [data, setData] = useState<FormValues[]>(() => makeData(tableData));
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [filtering, setFiltering] = useState('');
   const table = useReactTable({
@@ -92,21 +92,21 @@ export function Table() {
             </option>
           ))}
         </select>
-        <input
-          type="text"
-          value={filtering}
-          onChange={(e) => setFiltering(e.target.value)}
-          className="rounded border border-black"
-        />
+        <div className="inputWrap">
+          <span>Search: </span>
+          <input
+            type="text"
+            value={filtering}
+            onChange={(e) => setFiltering(e.target.value)}
+            className="rounded border border-black"
+          />
+        </div>
       </div>
       {/* <div /> */}
       <table className="mt-3 h-full w-full">
         <thead className="h-12 border  bg-sub-green text-slate-50">
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr
-              key={headerGroup.id}
-              className="border-seperate border-spacing-12"
-            >
+            <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
                   <th key={header.id} colSpan={header.colSpan}>
@@ -124,8 +124,8 @@ export function Table() {
                           header.getContext()
                         )}
                         {{
-                          asc: '⬆️',
-                          desc: '⬇️',
+                          asc: ' ⬆️',
+                          desc: ' ⬇️',
                         }[header.column.getIsSorted() as string] ?? null}
                       </div>
                     )}
@@ -138,7 +138,7 @@ export function Table() {
         <tbody className="text-center">
           {table.getRowModel().rows.map((row) => {
             return (
-              <tr key={row.id}>
+              <tr key={row.id} className="h-9">
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td key={cell.id}>
