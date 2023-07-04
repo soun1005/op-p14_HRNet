@@ -141,7 +141,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
               <tr key={row.id} className="h-9">
                 {row.getVisibleCells().map((cell) => {
                   return (
-                    <td key={cell.id}>
+                    <td key={cell.id} className="capitalize">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

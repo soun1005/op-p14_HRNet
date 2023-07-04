@@ -33,6 +33,9 @@ const MyDatePicker = ({
         closeOnScroll={true}
         todayButton="Today"
         filterDate={filterDate}
+        showMonthDropdown
+        showYearDropdown
+        dropdownMode="select"
         className="mb-1 min-h-[auto] rounded-sm border border-solid border-gray-300 placeholder-gray-200 focus:placeholder-opacity-0 focus:outline-none"
       />
     </>
