@@ -11,7 +11,6 @@ import {
 } from '@tanstack/react-table';
 import { makeData } from './makeData';
 import FormValues from '../../type/formType';
-// import mockData from '../../data/mockEmployees';
 
 export function BasicTable({ tableData }: { tableData: FormValues[] }) {
   // columns
@@ -77,6 +76,9 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
     debugTable: true,
   });
 
+  // console.log('filtered value:', table.getRowModel().rows.length);
+  // console.log('data:', data.length);
+
   return (
     <div className="tableWrap mb-10 mt-5 flex w-full flex-col items-center pb-5">
       <div className="optionWrap flex w-full justify-between">
@@ -104,7 +106,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
       </div>
       {/* <div /> */}
       <table className="mt-3 h-full w-full">
-        <thead className="h-12 border  bg-sub-green text-slate-50">
+        <thead className="mt-6 h-11  border bg-sub-green text-slate-50">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -135,6 +137,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
             </tr>
           ))}
         </thead>
+
         <tbody className="text-center">
           {table.getRowModel().rows.map((row) => {
             return (
@@ -152,33 +155,46 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
               </tr>
             );
           })}
+          {table.getRowModel().rows.length === 0 && (
+            <tr>
+              <td colSpan={columns.length} className="pt-5 text-center">
+                No employees found.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       {/* <button onClick={() => table.setPageIndex(0)}>First Page</button> */}
 
-      <div className="btnWrap mt-16 flex w-full justify-between">
-        <button
-          className=" rounded-lg border bg-sub-green px-5 py-1 text-slate-100"
-          disabled={!table.getCanPreviousPage()}
-          onClick={() => table.previousPage()}
-        >
-          Previous Page
-        </button>
-        <button
-          className=" rounded-lg border bg-sub-green px-5 py-1 text-slate-100"
-          disabled={!table.getCanNextPage()}
-          onClick={() => table.nextPage()}
-        >
-          Next Page
-        </button>
-      </div>
+      {data.length > 10 && (
+        <div className="btnWrap mt-16 flex w-full justify-between">
+          <button
+            className=" rounded-lg border bg-sub-green px-5 py-1 text-slate-100"
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
+          >
+            Previous Page
+          </button>
+          <button
+            className=" rounded-lg border bg-sub-green px-5 py-1 text-slate-100"
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
+          >
+            Next Page
+          </button>
+        </div>
+      )}
 
-      <span className="flex items-center gap-1">
-        <div>Page</div>
-        <strong>
-          {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-        </strong>
-      </span>
+      {data.length > 0 && (
+        <span className="mt-10 flex items-center">
+          <div>Page</div>
+          <strong>
+            {table.getState().pagination.pageIndex + 1} of{' '}
+            {table.getPageCount()}
+          </strong>
+        </span>
+      )}
+
       {/* <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
         Last Page
       </button> */}
