@@ -10,6 +10,8 @@ const Employees = () => {
   const storedData = useSelector((state: RootState) => state.data);
   const data = useMemo(() => storedData, [storedData]);
   // const data = useMemo(() => mockData, []);
+  console.log('data:', data);
+  // console.log('type of data:', typeof data);
 
   return (
     <div className="h-full">
@@ -22,7 +24,7 @@ const Employees = () => {
       ) : (
         <BasicTable tableData={data} />
       )} */}
-      <BasicTable tableData={data} />
+      <BasicTable tableData={data.data} />
     </div>
   );
 };
