@@ -141,7 +141,10 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
         <tbody className="text-center">
           {table.getRowModel().rows.map((row) => {
             return (
-              <tr key={row.id} className="h-9">
+              <tr
+                key={row.id}
+                className="h-9 border-b border-dotted border-gray-300"
+              >
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td key={cell.id} className="capitalize">

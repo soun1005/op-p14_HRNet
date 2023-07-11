@@ -11,7 +11,7 @@ import MyDatePicker from '../components/forms/DatePicker';
 import FormType from '../type/formType';
 import validateForm from '../components/forms/inputs/formValidation';
 import Error from '../components/forms/inputs/Error';
-import Modal from '../components/Modal';
+import { Modal } from '@soeunlee/reactjs-modal';
 
 // const stateDefault = stateData[0];
 // console.log(stateDefault);
@@ -90,7 +90,7 @@ const Home = () => {
     <div className="relative h-screen">
       <NavBar page="View Employees" link={'/employees'} />
       <div className="formContainer max-w-6/12 relative mx-auto flex h-full max-w-xs flex-col items-center">
-        <h2 className="mb-6 text-center text-2xl">Create Employee</h2>
+        <h2 className="mb-6 text-center text-2xl">Create Employee 📇</h2>
 
         <form
           action="#"
@@ -206,10 +206,9 @@ const Home = () => {
       <Modal
         onClose={() => setIsModalOpen(false)}
         setModalOpen={isModalOpen}
-        backgroundClass="modalBackground fixed top-0 left-0 flex flex-col h-screen w-screen items-center justify-center"
+        backgroundClass="bg-zinc-500/60 modalBackground fixed top-0 left-0 flex flex-col h-screen w-screen items-center justify-center"
         containerClass="modalContainer bg-neutral-300/80 flex flex-col items-center justify-around py-1 w-1/3 h-28 rounded"
         bodyClass="modalBody"
-        footerClass="modalFooter"
         btnClass="modalBtn rounded-full bg-sub-green py-1 w-20"
         btnLabel="close"
         btnLabelClass="text-sm text-slate-50 font-medium"

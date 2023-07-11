@@ -9,21 +9,11 @@ const Employees = () => {
   // get redux state
   const storedData = useSelector((state: RootState) => state.data);
   const data = useMemo(() => storedData, [storedData]);
-  // const data = useMemo(() => mockData, []);
-  console.log('data:', data);
-  // console.log('type of data:', typeof data);
 
   return (
     <div className="h-full">
       <NavBar page="Return to home" link={'/'} />
-      <h1 className="mb-6 text-center text-2xl">Current Employees</h1>
-      {/* {storedData.length === 0 ? (
-        <span className="align-center mt-48 flex h-full w-full justify-center">
-          No employees
-        </span>
-      ) : (
-        <BasicTable tableData={data} />
-      )} */}
+      <h1 className="mb-6 text-center text-2xl">Current Employees 🗂</h1>
       <BasicTable tableData={data.data} />
     </div>
   );
