@@ -13,9 +13,6 @@ import validateForm from '../components/forms/inputs/formValidation';
 import Error from '../components/forms/inputs/Error';
 import { Modal } from '@soeunlee/reactjs-modal';
 
-// const stateDefault = stateData[0];
-// console.log(stateDefault);
-
 const Home = () => {
   // to format state data to display in a dropdown library
   const formattedState = stateDataFormat(stateData);
@@ -54,11 +51,8 @@ const Home = () => {
 
     const validate = validateForm(values);
     setFormErrors(validate);
-    console.log('formErrors', formErrors);
-    console.log('validate', validate);
 
     if (Object.keys(validate).length === 0) {
-      console.log('validated');
       dispatch(updateData({ values }));
       setValues({
         firstName: '',
@@ -84,7 +78,6 @@ const Home = () => {
 
   // to check stored data in Redux
   // const storeData = useSelector((state: RootState) => state.data);
-  // console.log(storeData);
 
   return (
     <div className="relative h-screen">

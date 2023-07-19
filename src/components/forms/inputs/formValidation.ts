@@ -14,7 +14,6 @@ const validateForm = (values: FormType) => {
     department,
   } = values;
   // take values from state as props. check each inputs with 'if'
-  // console.log('value of first name', firstName.length);
   const regex = /^[a-zA-Z]{2,15}$/;
   const lastNameRegex = /^[A-Za-z ]{1,20}$/;
   const cityRegex = /^[a-zA-Z]{2,10}$/;
@@ -49,7 +48,6 @@ const validateForm = (values: FormType) => {
   } else if (!zipRegex.test(zip)) {
     errors.zip = 'This is not a valid zipcode format';
   }
-  // console.log('error length', Object.keys(formErrors).length);
 
   if (birthDate === '') {
     errors.birthDate = 'Please select a date';

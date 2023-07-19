@@ -76,9 +76,6 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
     debugTable: true,
   });
 
-  // console.log('filtered value:', table.getRowModel().rows.length);
-  // console.log('data:', data.length);
-
   return (
     <div className="tableWrap mb-10 mt-5 flex w-full flex-col items-center pb-5">
       <div className="optionWrap flex w-full justify-between">

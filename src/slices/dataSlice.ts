@@ -21,8 +21,6 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     updateData(state, action) {
-      // console.log('action.payload:', action.payload);
-
       return [
         ...state,
         {
