@@ -30,9 +30,10 @@
 
 ## Features
 
-- Fully controlled forms are implemented, ensuring precise control and validation of each inputs
-- Data is persisted using Redux Persist, ensuring the preservation of state across page reloads or session durations
+- Controlled forms are implemented, ensuring precise control and validation of each inputs.
+- Data is persisted using Redux Persist, ensuring the preservation of state across page reloads or session durations.
 - The table component includes advanced search and sorting functionalities, allowing users to easily find and organize data according to their needs.
+- Fully responsive design.
 
 ## Deployment
 

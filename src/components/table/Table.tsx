@@ -77,7 +77,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
   });
 
   return (
-    <div className="tableWrap mb-10 mt-5 flex w-full flex-col items-center pb-5 max-phone:text-phone tablet:text-tablet">
+    <div className="tableWrap mb-10 mt-5 flex w-full flex-col items-center pb-5 tablet:text-tablet max-phone:text-phone">
       <div className="optionWrap flex w-full justify-between">
         <select
           value={table.getState().pagination.pageSize}
@@ -102,7 +102,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
         </div>
       </div>
       {/* <div /> */}
-      <table className="mt-3 h-full w-full max-phone:block max-phone:overflow-x-auto max-phone:whitespace-nowrap tablet:block tablet:overflow-x-auto tablet:whitespace-nowrap">
+      <table className="mt-3 h-full w-full tablet:block tablet:overflow-x-auto tablet:whitespace-nowrap max-phone:block max-phone:overflow-x-auto max-phone:whitespace-nowrap">
         <thead className="mt-6 h-11  border bg-sub-green text-slate-50">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -157,7 +157,10 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
           })}
           {table.getRowModel().rows.length === 0 && (
             <tr>
-              <td colSpan={columns.length} className="pt-5 text-center">
+              <td
+                colSpan={columns.length}
+                className="pt-5 text-center max-phone:absolute max-phone:text-left"
+              >
                 No employees found.
               </td>
             </tr>
