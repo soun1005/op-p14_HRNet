@@ -1,6 +1,6 @@
 # Wealth Health - HR net
 
-![스크린샷 2023-07-19 16 14 02](https://github.com/soun1005/op-p14_HRNet/assets/79379473/0a797212-8cd7-45e6-a228-3178e80f9d9a)
+![mockup combined readytouse](https://github.com/soun1005/op-p14_HRNet/assets/79379473/d71c4eb9-3725-4d82-9306-3591cb5c2519)
 🤸🏼‍♂️ [Visit live demo](https://hrnetsoeunlee.netlify.app/) 🏄🏼‍♀️
 
 ## Project overview 👇🏼

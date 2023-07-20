@@ -12,6 +12,7 @@ import FormType from '../type/formType';
 import validateForm from '../components/forms/inputs/formValidation';
 import Error from '../components/forms/inputs/Error';
 import { Modal } from '@soeunlee/reactjs-modal';
+import PageTitle from '../components/PageTitle';
 
 const Home = () => {
   // to format state data to display in a dropdown library
@@ -80,10 +81,10 @@ const Home = () => {
   // const storeData = useSelector((state: RootState) => state.data);
 
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen ">
       <NavBar page="View Employees" link={'/employees'} />
       <div className="formContainer max-w-6/12 relative mx-auto flex h-full max-w-xs flex-col items-center">
-        <h2 className="mb-6 text-center text-2xl">Create Employee 📇</h2>
+        <PageTitle title="Create Employee 📇" />
 
         <form
           action="#"
@@ -189,7 +190,7 @@ const Home = () => {
 
           <button
             type="submit"
-            className="mb-10 mt-10 rounded-full bg-sub-green px-20 py-2"
+            className="mb-16 mt-10 rounded-full bg-sub-green px-20 py-2"
           >
             Save
           </button>

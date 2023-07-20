@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import { RootState } from '../app/store';
 import { BasicTable } from '../components/table/Table';
 import { useMemo } from 'react';
+import PageTitle from '../components/PageTitle';
 // import mockData from '../data/mockEmployees';
 
 const Employees = () => {
@@ -13,7 +14,7 @@ const Employees = () => {
   return (
     <div className="h-full">
       <NavBar page="Return to home" link={'/'} />
-      <h1 className="mb-6 text-center text-2xl">Current Employees 🗂</h1>
+      <PageTitle title="Current Employees 🗂" />
       <BasicTable tableData={data.data} />
     </div>
   );

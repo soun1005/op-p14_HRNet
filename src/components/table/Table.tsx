@@ -77,7 +77,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
   });
 
   return (
-    <div className="tableWrap mb-10 mt-5 flex w-full flex-col items-center pb-5">
+    <div className="tableWrap mb-10 mt-5 flex w-full flex-col items-center pb-5 max-phone:text-phone tablet:text-tablet">
       <div className="optionWrap flex w-full justify-between">
         <select
           value={table.getState().pagination.pageSize}
@@ -102,7 +102,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
         </div>
       </div>
       {/* <div /> */}
-      <table className="mt-3 h-full w-full">
+      <table className="mt-3 h-full w-full max-phone:block max-phone:overflow-x-auto max-phone:whitespace-nowrap tablet:block tablet:overflow-x-auto tablet:whitespace-nowrap">
         <thead className="mt-6 h-11  border bg-sub-green text-slate-50">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -113,7 +113,7 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
                       <div
                         {...{
                           className: header.column.getCanSort()
-                            ? 'cursor-pointer select-none'
+                            ? 'cursor-pointer select-none tablet:mx-2'
                             : '',
                           onClick: header.column.getToggleSortingHandler(),
                         }}
@@ -164,7 +164,6 @@ export function BasicTable({ tableData }: { tableData: FormValues[] }) {
           )}
         </tbody>
       </table>
-      {/* <button onClick={() => table.setPageIndex(0)}>First Page</button> */}
 
       {data.length > 10 && (
         <div className="btnWrap mt-16 flex w-full justify-between">
