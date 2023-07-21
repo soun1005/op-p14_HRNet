@@ -201,7 +201,7 @@ const Home = () => {
         onClose={() => setIsModalOpen(false)}
         setModalOpen={isModalOpen}
         backgroundClass="bg-zinc-500/60 modalBackground fixed top-0 left-0 flex flex-col h-screen w-screen items-center justify-center"
-        containerClass="modalContainer bg-neutral-300/80 flex flex-col items-center justify-around py-1 w-1/3 h-28 rounded"
+        containerClass="modalContainer bg-neutral-300/80 flex flex-col items-center justify-around py-1 w-1/3 h-28 rounded max-phone:w-10/12"
         bodyClass="modalBody"
         btnClass="modalBtn rounded-full bg-sub-green py-1 w-20"
         btnLabel="close"
