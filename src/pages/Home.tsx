@@ -4,7 +4,6 @@ import Input from '../components/forms/inputs/Input';
 import stateData from '../data/states';
 import stateDataFormat from '../dataFormat/stateFormat';
 import { useState } from 'react';
-// import { RootState } from '../app/store';
 import { useDispatch } from 'react-redux';
 import { updateData } from '../slices/dataSlice';
 import MyDatePicker from '../components/forms/DatePicker';
